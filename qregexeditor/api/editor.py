@@ -38,23 +38,6 @@ class RegexEditorWidget(QtWidgets.QWidget):
         self.ui.lineEditRegex.setText(value)
 
     @property
-    def compile_flags(self):
-        """
-        Gets/Sets the compile flags
-        :return:
-        """
-        ret_val = 0
-        for flg, widget in self._mapping.items():
-            if widget.isChecked():
-                ret_val |= flg
-        return ret_val
-
-    @compile_flags.setter
-    def compile_flags(self, value):
-        for flg, widget in self._mapping.items():
-            widget.setChecked(bool(value & flg))
-
-    @property
     def quick_ref_checked(self):
         """
         Gets/sets the show quick ref checkbox state
@@ -70,10 +53,6 @@ class RegexEditorWidget(QtWidgets.QWidget):
         self.ui = editor_ui.Ui_Form()
         self.ui.setupUi(self)
         self.ui.lblError.hide()
-        self._mapping = {
-            re.IGNORECASE: self.ui.checkBoxIgnoreCase,
-            # add other flags here
-        }
         self.ui.lineEditRegex.textChanged.connect(self._update_view)
         self.ui.plainTextEditTestString.textChanged.connect(
             self._update_view)
@@ -130,7 +109,7 @@ class RegexEditorWidget(QtWidgets.QWidget):
     def _update_view(self, *args):
         if self.regex:
             try:
-                prog = re.compile(self.regex, self.compile_flags)
+                prog = re.compile(self.regex)
             except sre_constants.error as e:
                 self._show_error(e)
             else:
