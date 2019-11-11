@@ -110,7 +110,7 @@ class RegexEditorWidget(QtWidgets.QWidget):
         if isChecked is True:
             matches = ""
             for x in prog.findall(self.ui.plainTextEditTestString.toPlainText()):
-                matches += x + "\n"
+                matches += str(x) + "\n"
             self.ui.plainTextEditMatchResult.setPlainText(
                 str(matches))
         elif isChecked is False:
