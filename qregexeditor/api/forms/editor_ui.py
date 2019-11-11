@@ -71,7 +71,7 @@ class Ui_Form(object):
         self.lblError.setText(_translate("Form", "lblError"))
         self.lineEditRegex.setToolTip(_translate("Form", "<html><head/><body><p>Type your regular expression here</p></body></html>"))
         self.checkBoxIgnoreCase.setToolTip(_translate("Form", "Only show the matched result rather than highlighting it in the full text"))
-        self.checkBoxIgnoreCase.setText(_translate("Form", "Only show the result")                         
+        self.checkBoxIgnoreCase.setText(_translate("Form", "Only show the result"))
         self.groupBox_2.setTitle(_translate("Form", "Test strings"))
         self.plainTextEditTestString.setToolTip(_translate("Form", "<html><head/><body><p>Type your test strings here</p></body></html>"))
         self.groupBox_3.setTitle(_translate("Form", "Match result"))
