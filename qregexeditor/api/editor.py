@@ -103,14 +103,19 @@ class RegexEditorWidget(QtWidgets.QWidget):
         self._highlighter.prog = None
         self._highlighter.rehighlight()
 
-    def _show_match_results(self, prog):
+    def _show_match_results(self, prog, isChecked):
         self.ui.lblError.hide()
         self._set_widget_background_color(
             self.ui.lineEditRegex, QtGui.QColor('#bbfcbb'))
-        self.ui.plainTextEditMatchResult.setPlainText(
-            self.ui.plainTextEditTestString.toPlainText())
-        self._highlighter.prog = prog
-        self._highlighter.rehighlight()
+        if isChecked is True:
+           if len(prog) > 0:
+               self.ui.plainTextEditMatchResult.setPlainText(
+                    str(prog.findall(self.ui.plainTextEditTestString.toPlainText())))
+        elif isChecked is False:
+            self.ui.plainTextEditMatchResult.setPlainText(
+                self.ui.plainTextEditTestString.toPlainText())
+            self._highlighter.prog = prog
+            self._highlighter.rehighlight()
 
     def _clear(self):
         self.ui.lblError.hide()
@@ -127,6 +132,6 @@ class RegexEditorWidget(QtWidgets.QWidget):
             except sre_constants.error as e:
                 self._show_error(e)
             else:
-                self._show_match_results(prog)
+                self._show_match_results(prog, self.ui.checkBoxIgnoreCase.isChecked())
         else:
             self._clear()
