@@ -108,9 +108,11 @@ class RegexEditorWidget(QtWidgets.QWidget):
         self._set_widget_background_color(
             self.ui.lineEditRegex, QtGui.QColor('#bbfcbb'))
         if isChecked is True:
-           if len(prog) > 0:
-               self.ui.plainTextEditMatchResult.setPlainText(
-                    str(prog.findall(self.ui.plainTextEditTestString.toPlainText())))
+            matches = ""
+            for x in prog.findall(self.ui.plainTextEditTestString.toPlainText()):
+                matches += x + "\n"
+            self.ui.plainTextEditMatchResult.setPlainText(
+                str(matches))
         elif isChecked is False:
             self.ui.plainTextEditMatchResult.setPlainText(
                 self.ui.plainTextEditTestString.toPlainText())
